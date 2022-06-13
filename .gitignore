@@ -1,0 +1,6 @@
+*.o
+*.aux
+*.log
+*.tex
+*.drawio
+*.png
