@@ -1,0 +1,31 @@
+#ifndef MAIN_WINDOW_HPP
+#define MAIN_WINDOW_HPP
+
+#include <QWidget>
+#include <QDate>
+#include <QPushButton>
+#include "timetable_window.hpp"
+
+class MainWindow : public QWidget {
+private:
+    QDate current_date;
+    QPushButton *date_button;
+    // TimetableWindow *timetable;
+    std::map<QDate,std::vector<Event>> events;
+    QFont font;
+    int font_size = 16;
+    QString font_family = "Ubuntumono";
+    
+    void updateGUI();
+public:
+    MainWindow(QWidget *parent = nullptr);
+    void addEvent(Event &event);
+    void deleteEvent(Event &event);
+Q_OBJECT
+private slots:
+    void incrementDate();
+    void decrementDate();
+    void onAddEvent();
+};
+
+#endif

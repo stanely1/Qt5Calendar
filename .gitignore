@@ -1,6 +1,16 @@
+# executables (no extension files):
+*
+!*.*
+!*/
+!Makefile
+
+# trash
 *.o
 *.aux
 *.log
 *.tex
 *.drawio
 *.png
+*.json
+moc_*
+test/
