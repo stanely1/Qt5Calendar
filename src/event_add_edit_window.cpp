@@ -4,6 +4,18 @@
 #include <QLabel>
 #include <iostream>
 
+// date select spin box
+
+DateSelectSpinBox::DateSelectSpinBox(QWidget *parent) : QSpinBox(parent) {};
+
+void DateSelectSpinBox::setMonthDayRange(int m)
+{
+    static int days_in_month[13] = {29,31,28,31,30,31,30,31,31,30,31,30,31}; // 0 - luty w roku przestępczym :)
+    setRange(1,days_in_month[m]);
+}
+
+// Windows:
+
 EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent) : 
     QDialog(parent), main_window(_main_window)
 {
@@ -13,19 +25,44 @@ EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent
     description_edit = new QTextEdit(this);
 
     // date
-    static int days_in_month[13] = {29,31,28,31,30,31,30,31,31,30,31,30,31}; // 0 - luty w roku przestępczym :) 
+    start_day   = new DateSelectSpinBox(this);
+    start_month = new DateSelectSpinBox(this);
+    start_year  = new DateSelectSpinBox(this);
+    start_hour  = new DateSelectSpinBox(this);
+    start_min   = new DateSelectSpinBox(this);
 
-    start_day   = new QSpinBox(this); start_day->  setRange(1,31); start_day->setMinimumWidth(50);
-    start_month = new QSpinBox(this); start_month->setRange(1,12); start_month->setMinimumWidth(50);
-    start_year  = new QSpinBox(this); start_year-> setRange(2022,3000); start_year->setMinimumWidth(80);
-    start_hour  = new QSpinBox(this); start_hour-> setRange(0,23); start_hour->setMinimumWidth(50);
-    start_min   = new QSpinBox(this); start_min->  setRange(0,59); start_min->setMinimumWidth(50);
+    end_day   = new DateSelectSpinBox(this);
+    end_month = new DateSelectSpinBox(this);
+    end_year  = new DateSelectSpinBox(this);
+    end_hour  = new DateSelectSpinBox(this);
+    end_min   = new DateSelectSpinBox(this);
 
-    end_day   = new QSpinBox(this); end_day->  setRange(1,31); end_day->setMinimumWidth(50);
-    end_month = new QSpinBox(this); end_month->setRange(1,12); end_month->setMinimumWidth(50);
-    end_year  = new QSpinBox(this); end_year-> setRange(2022,3000); end_year->setMinimumWidth(80);
-    end_hour  = new QSpinBox(this); end_hour-> setRange(0,23); end_hour->setMinimumWidth(50);
-    end_min   = new QSpinBox(this); end_min->  setRange(0,59); end_min->setMinimumWidth(50);
+    auto current_time = QTime::currentTime();
+    const int min_spin_box_width = 55;
+
+    start_day  ->setValue(main_window->getCurrentDate().day());
+    start_month->setValue(main_window->getCurrentDate().month());
+    start_year ->setValue(main_window->getCurrentDate().year());
+    start_hour ->setValue(current_time.hour());
+    start_min  ->setValue(current_time.minute());
+    
+    end_day  ->setValue(main_window->getCurrentDate().day());
+    end_month->setValue(main_window->getCurrentDate().month());
+    end_year ->setValue(main_window->getCurrentDate().year());
+    end_hour ->setValue(current_time.hour());
+    end_min  ->setValue(current_time.minute());
+
+    start_day->  setMonthDayRange(start_month->value()); start_day->setMinimumWidth(min_spin_box_width);
+    start_month->setRange(1,12); start_month->setMinimumWidth(min_spin_box_width);
+    start_year-> setRange(2022,3000); start_year->setMinimumWidth(80);
+    start_hour-> setRange(0,23); start_hour->setMinimumWidth(min_spin_box_width);
+    start_min->  setRange(0,59); start_min->setMinimumWidth(min_spin_box_width);
+
+    end_day->  setMonthDayRange(end_month->value()); end_day->setMinimumWidth(min_spin_box_width);
+    end_month->setRange(1,12); end_month->setMinimumWidth(min_spin_box_width);
+    end_year-> setRange(2022,3000); end_year->setMinimumWidth(80);
+    end_hour-> setRange(0,23); end_hour->setMinimumWidth(min_spin_box_width);
+    end_min->  setRange(0,59); end_min->setMinimumWidth(min_spin_box_width);
 
     auto *start_hbox = new QHBoxLayout;
     auto *end_hbox   = new QHBoxLayout;
@@ -52,6 +89,12 @@ EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent
     end_hbox->addWidget(new QLabel("minute:"));
     end_hbox->addWidget(end_min,1);
 
+    connect(start_month,qOverload<int>(&DateSelectSpinBox::valueChanged),start_day,
+            &DateSelectSpinBox::setMonthDayRange);
+    connect(end_month,qOverload<int>(&DateSelectSpinBox::valueChanged),end_day,
+            &DateSelectSpinBox::setMonthDayRange);
+
+    // layout
     auto *form = new QFormLayout;
     form->setLabelAlignment(Qt::AlignRight | Qt::AlignVCenter);
     form->addRow("Title:", title_edit);

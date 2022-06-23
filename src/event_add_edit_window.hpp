@@ -10,12 +10,20 @@
 #include "event.hpp"
 #include "main_window.hpp"
 
+class DateSelectSpinBox : public QSpinBox {
+public:
+    DateSelectSpinBox(QWidget *parent = nullptr);
+Q_OBJECT
+public slots:
+    void setMonthDayRange(int m);
+};
+
 class EventAddEditWindow : public QDialog {
 protected:
     QLineEdit *title_edit;
     QTextEdit *description_edit;
-    QSpinBox *start_day, *start_month, *start_year, *start_hour, *start_min;
-    QSpinBox *end_day, *end_month, *end_year, *end_hour, *end_min;
+    DateSelectSpinBox *start_day, *start_month, *start_year, *start_hour, *start_min;
+    DateSelectSpinBox *end_day, *end_month, *end_year, *end_hour, *end_min;
 
     QVBoxLayout *vbox;
     MainWindow *main_window;

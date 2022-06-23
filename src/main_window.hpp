@@ -12,15 +12,20 @@ private:
     QPushButton *date_button;
     // TimetableWindow *timetable;
     std::map<QDate,std::vector<Event>> events;
+
     QFont font;
     int font_size = 16;
     QString font_family = "Ubuntumono";
+
+    int width = 960, height = 720;
     
     void updateGUI();
 public:
     MainWindow(QWidget *parent = nullptr);
     void addEvent(Event &event);
     void deleteEvent(Event &event);
+
+    QDate getCurrentDate();
 Q_OBJECT
 private slots:
     void incrementDate();

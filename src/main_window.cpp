@@ -4,9 +4,10 @@
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
 
+// constructor
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::currentDate())
 {
-    this->resize(960,720);
+    this->resize(width,height);
 
     font = QFont(font_family,font_size);
     this->setFont(font);
@@ -40,11 +41,13 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     this->setLayout(vbox);
 }
 
+// close window => quit app
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     qApp->quit();
 }
 
+// change current date
 void MainWindow::incrementDate()
 {
     current_date = current_date.addDays(1);
@@ -56,14 +59,16 @@ void MainWindow::decrementDate()
     updateGUI();
 }
 
+// update GUI
 void MainWindow::updateGUI()
 {
     date_button->setText(current_date.toString());
 }
 
+// handling event adding actions
 void MainWindow::onAddEvent()
 {
-    auto *adder = new EventAdderWindow();
+    auto *adder = new EventAdderWindow(this);
     adder->show();
 }
 
@@ -72,3 +77,6 @@ void MainWindow::addEvent(Event &event)
     QTextStream out(stdout);
     out << "add event: " << event.toString() << "\n";
 }
+
+// date getter
+QDate MainWindow::getCurrentDate() {return current_date;} 
