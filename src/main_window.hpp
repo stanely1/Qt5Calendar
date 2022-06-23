@@ -26,6 +26,8 @@ private slots:
     void incrementDate();
     void decrementDate();
     void onAddEvent();
+protected:
+    virtual void closeEvent(QCloseEvent *event);
 };
 
 #endif

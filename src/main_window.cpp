@@ -1,5 +1,6 @@
 #include <QVBoxLayout>
 #include <QFrame>
+#include <QApplication>
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
 
@@ -19,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     auto *add_event_button = new QPushButton("+",this);
     auto *option_button = new QPushButton("=",this);
 
+    add_event_button->setToolTip("Add new event");
+    date_button->setToolTip("Select day");
+    option_button->setToolTip("Options");
+
     connect(left_button, &QPushButton::clicked, this, &MainWindow::decrementDate);
     connect(right_button, &QPushButton::clicked, this, &MainWindow::incrementDate);
     connect(add_event_button, &QPushButton::clicked, this, &MainWindow::onAddEvent);
@@ -33,6 +38,11 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     vbox->addStretch(1);
 
     this->setLayout(vbox);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    qApp->quit();
 }
 
 void MainWindow::incrementDate()
