@@ -12,10 +12,12 @@ private:
     QDateTime start;
     QDateTime end;
 public:
+    Event() = default;
     Event(const QString &_title, const QString &_description, const QDateTime &_start, const QDateTime &_end);
     void runEditor();
 
     QString toString();
+    QString toStringStorable();
 
     QString getTitle() const;
     QString getDescription() const;

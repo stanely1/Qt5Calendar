@@ -3,19 +3,21 @@
 #include <QApplication>
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
+#include "event_saver.hpp"
 
 MainWindow *main_window;
 
 // constructor
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::currentDate())
 {
-    this->resize(width,height);
+    EventSaver::readEvents(events);
 
+    this->resize(width,height);
     font = QFont(font_family,font_size);
     this->setFont(font);
 
-    auto *vbox = new QVBoxLayout(this);
-    auto *hbox = new QHBoxLayout(this);
+    auto *vbox = new QVBoxLayout;
+    auto *hbox = new QHBoxLayout;
 
     date_button = new QPushButton(current_date.toString(),this);
     auto *left_button = new QPushButton("<",this);
@@ -49,12 +51,15 @@ MainWindow::~MainWindow()
 {
     delete date_button;
     delete timetable;
+
+    EventSaver::saveEvents(events);
     events.clear();
 }
 
 // close window => quit app
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    this->~MainWindow();
     qApp->quit();
 }
 
@@ -108,7 +113,7 @@ void MainWindow::deleteEvent(Event *event, bool free_ptr)
         if(*i == event) 
         {
             if(free_ptr) delete event;
-            events[event_date].erase(i); 
+            events[event_date].erase(i);
             break;
         }
     updateGUI();

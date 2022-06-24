@@ -16,7 +16,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -std=c++17 -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -39,7 +39,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = qt5calendar1.0.0
 DISTDIR = /home/stas/uwr/sem2/programowanie_obiektowe/projekt/.tmp/qt5calendar1.0.0
 LINK          = g++
-LFLAGS        = -Wl,-O1
+LFLAGS        = -lstdc++fs -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
@@ -56,7 +56,8 @@ SOURCES       = src/main.cpp \
 		src/main_window.cpp \
 		src/event_add_edit_window.cpp \
 		src/event.cpp \
-		src/timetable_window.cpp moc_main_window.cpp \
+		src/timetable_window.cpp \
+		src/event_saver.cpp moc_main_window.cpp \
 		moc_event_add_edit_window.cpp \
 		moc_event.cpp
 OBJECTS       = main.o \
@@ -64,6 +65,7 @@ OBJECTS       = main.o \
 		event_add_edit_window.o \
 		event.o \
 		timetable_window.o \
+		event_saver.o \
 		moc_main_window.o \
 		moc_event_add_edit_window.o \
 		moc_event.o
@@ -145,11 +147,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		qt5calendar.pro src/main_window.hpp \
 		src/event_add_edit_window.hpp \
 		src/event.hpp \
-		src/timetable_window.hpp src/main.cpp \
+		src/timetable_window.hpp \
+		src/event_saver.hpp src/main.cpp \
 		src/main_window.cpp \
 		src/event_add_edit_window.cpp \
 		src/event.cpp \
-		src/timetable_window.cpp
+		src/timetable_window.cpp \
+		src/event_saver.cpp
 QMAKE_TARGET  = qt5calendar
 DESTDIR       = 
 TARGET        = qt5calendar
@@ -329,8 +333,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp src/event_saver.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp src/event_saver.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -360,7 +364,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -std=c++17 -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_main_window.cpp moc_event_add_edit_window.cpp moc_event.cpp
 compiler_moc_header_clean:
@@ -427,6 +431,10 @@ event.o: src/event.cpp src/event.hpp \
 timetable_window.o: src/timetable_window.cpp src/timetable_window.hpp \
 		src/event.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timetable_window.o src/timetable_window.cpp
+
+event_saver.o: src/event_saver.cpp src/event_saver.hpp \
+		src/event.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o event_saver.o src/event_saver.cpp
 
 moc_main_window.o: moc_main_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp

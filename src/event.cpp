@@ -14,11 +14,21 @@ void Event::runEditor()
     auto editor = new EventEditorWindow(this);
     editor->show();
 }
+
 QString Event::toString()
 {
     return title + "\n" + description + "\nstart: " +
            start.toString() + "\nend: " + end.toString();
 }
+QString Event::toStringStorable()
+{
+    return title + "\n" + description + "\1\n" 
+    + QString("%1 %2 %3 %4 %5 ").arg(start.date().year()).arg(start.date().month()).arg(start.date().day())
+                               .arg(start.time().hour()).arg(start.time().minute())
+    + QString("%1 %2 %3 %4 %5").arg(end.date().year()).arg(end.date().month()).arg(end.date().day())
+                               .arg(end.time().hour()).arg(end.time().minute());
+}
+
 //get event title
 QString Event::getTitle() const {return title;} 
 // get event description
