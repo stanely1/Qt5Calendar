@@ -93,6 +93,26 @@ EventAddEditWindow::EventAddEditWindow(QWidget *parent) : QDialog(parent)
     setLayout(vbox);
 }
 
+EventAddEditWindow::~EventAddEditWindow()
+{
+    delete title_edit;
+    delete description_edit;
+
+    delete start_day;
+    delete start_month;
+    delete start_year;
+    delete start_hour;
+    delete start_min;
+
+    delete end_day;
+    delete end_month;
+    delete end_year;
+    delete end_hour;
+    delete end_min;
+
+    delete vbox;
+}
+
 // adder
 
 EventAdderWindow::EventAdderWindow(QWidget *parent) : 

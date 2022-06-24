@@ -20,6 +20,8 @@ private:
     int width = 960, height = 720;
 public:
     MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
     void addEvent(Event *event);
     void deleteEvent(Event *event, bool free_ptr = true);
 

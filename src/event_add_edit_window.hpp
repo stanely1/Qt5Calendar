@@ -27,6 +27,7 @@ protected:
     QVBoxLayout *vbox;
 public:
     EventAddEditWindow(QWidget *parent = nullptr);
+    ~EventAddEditWindow();
 };
 
 class EventAdderWindow : public EventAddEditWindow {

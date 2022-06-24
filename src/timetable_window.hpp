@@ -7,9 +7,9 @@
 
 class TimetableWindow : public QWidget {
 private:
-    std::vector<Event*> events;
+    std::vector<Event*> *events;
 public:
-    TimetableWindow(std::vector<Event*> _events = {}, QWidget *parent = nullptr);
+    TimetableWindow(std::vector<Event*> *_events = nullptr, QWidget *parent = nullptr);
     // ~TimetableWindow();
 
     TimetableWindow & operator = (const TimetableWindow &t);

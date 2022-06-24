@@ -37,12 +37,19 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     hbox->addWidget(right_button,1,Qt::AlignLeft);
     hbox->addWidget(add_event_button,1,Qt::AlignRight);
 
-    timetable = new TimetableWindow(events[current_date],this);
+    timetable = new TimetableWindow(&events[current_date],this);
 
     vbox->addLayout(hbox);
     vbox->addWidget(timetable);
 
     this->setLayout(vbox);
+}
+// destructor
+MainWindow::~MainWindow()
+{
+    delete date_button;
+    delete timetable;
+    events.clear();
 }
 
 // close window => quit app
@@ -72,7 +79,7 @@ void MainWindow::updateGUI()
     l->removeWidget(timetable);
 
     delete timetable;
-    timetable = new TimetableWindow(events[current_date],this);
+    timetable = new TimetableWindow(&events[current_date],this);
 
     l->addWidget(timetable);
 }
