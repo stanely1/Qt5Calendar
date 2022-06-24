@@ -4,6 +4,8 @@
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
 
+MainWindow *main_window;
+
 // constructor
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::currentDate())
 {
@@ -35,8 +37,10 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     hbox->addWidget(right_button,1,Qt::AlignLeft);
     hbox->addWidget(add_event_button,1,Qt::AlignRight);
 
+    timetable = new TimetableWindow(events[current_date],this);
+
     vbox->addLayout(hbox);
-    vbox->addStretch(1);
+    vbox->addWidget(timetable);
 
     this->setLayout(vbox);
 }
@@ -63,6 +67,14 @@ void MainWindow::decrementDate()
 void MainWindow::updateGUI()
 {
     date_button->setText(current_date.toString());
+
+    auto *l = layout();
+    l->removeWidget(timetable);
+
+    delete timetable;
+    timetable = new TimetableWindow(events[current_date],this);
+
+    l->addWidget(timetable);
 }
 
 // handling event adding actions
@@ -72,11 +84,25 @@ void MainWindow::onAddEvent()
     adder->show();
 }
 
-void MainWindow::addEvent(Event &event)
+void MainWindow::addEvent(Event *event)
 {
-    QTextStream out(stdout);
-    out << "add event: " << event.toString() << "\n";
+    events[event->getStart().date()].push_back(event);
+    updateGUI();
 }
 
 // date getter
-QDate MainWindow::getCurrentDate() {return current_date;} 
+QDate MainWindow::getCurrentDate() {return current_date;}
+
+// delete event
+void MainWindow::deleteEvent(Event *event, bool free_ptr)
+{
+    auto event_date = event->getStart().date();
+    for(auto i = events[event_date].begin(); i != events[event_date].end(); i++)
+        if(*i == event) 
+        {
+            if(free_ptr) delete event;
+            events[event_date].erase(i); 
+            break;
+        }
+    updateGUI();
+}

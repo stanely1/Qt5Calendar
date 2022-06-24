@@ -17,25 +17,26 @@ public:
 
     QString toString();
 
-    QString getTitle();
-    QString getDescription();
-    QDateTime getStart();
-    QDateTime getEnd();
+    QString getTitle() const;
+    QString getDescription() const;
+    QDateTime getStart() const;
+    QDateTime getEnd() const;
 
-    void setTitle(QString &_title);
-    void setDescription(QString &_description);
-    void setStart(QDateTime &_start);
-    void setEnd(QDateTime &_end);
+    void setTitle(const QString &_title);
+    void setDescription(const QString &_description);
+    void setStart(const QDateTime &_start);
+    void setEnd(const QDateTime &_end);
 };
 
 class EventDisplayWindow : public QWidget {
 private: 
-    Event &event;
+    Event *event;
 public:
-    EventDisplayWindow(Event &_event, QWidget *parent = nullptr);
+    EventDisplayWindow(Event *_event, QWidget *parent = nullptr);
 Q_OBJECT
 private slots:
-    void onClick();
+    void onEdit();
+    void onDelete();
 };
 
 #endif

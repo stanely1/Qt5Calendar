@@ -55,13 +55,15 @@ OBJECTS_DIR   = ./
 SOURCES       = src/main.cpp \
 		src/main_window.cpp \
 		src/event_add_edit_window.cpp \
-		src/event.cpp moc_main_window.cpp \
+		src/event.cpp \
+		src/timetable_window.cpp moc_main_window.cpp \
 		moc_event_add_edit_window.cpp \
 		moc_event.cpp
 OBJECTS       = main.o \
 		main_window.o \
 		event_add_edit_window.o \
 		event.o \
+		timetable_window.o \
 		moc_main_window.o \
 		moc_event_add_edit_window.o \
 		moc_event.o
@@ -142,10 +144,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		qt5calendar.pro src/main_window.hpp \
 		src/event_add_edit_window.hpp \
-		src/event.hpp src/main.cpp \
+		src/event.hpp \
+		src/timetable_window.hpp src/main.cpp \
 		src/main_window.cpp \
 		src/event_add_edit_window.cpp \
-		src/event.cpp
+		src/event.cpp \
+		src/timetable_window.cpp
 QMAKE_TARGET  = qt5calendar
 DESTDIR       = 
 TARGET        = qt5calendar
@@ -325,8 +329,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -419,6 +423,10 @@ event.o: src/event.cpp src/event.hpp \
 		src/main_window.hpp \
 		src/timetable_window.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o event.o src/event.cpp
+
+timetable_window.o: src/timetable_window.cpp src/timetable_window.hpp \
+		src/event.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timetable_window.o src/timetable_window.cpp
 
 moc_main_window.o: moc_main_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp

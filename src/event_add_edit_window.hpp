@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QTextEdit>
 #include <QLineEdit>
-#include <QTextStream>
 #include <QVBoxLayout>
 #include <QSpinBox>
 #include "event.hpp"
@@ -26,14 +25,13 @@ protected:
     DateSelectSpinBox *end_day, *end_month, *end_year, *end_hour, *end_min;
 
     QVBoxLayout *vbox;
-    MainWindow *main_window;
 public:
-    EventAddEditWindow(MainWindow *_main_window = nullptr, QWidget *parent = nullptr);
+    EventAddEditWindow(QWidget *parent = nullptr);
 };
 
 class EventAdderWindow : public EventAddEditWindow {
 public:
-    EventAdderWindow(MainWindow *_main_window = nullptr, QWidget *parent = nullptr);
+    EventAdderWindow(QWidget *parent = nullptr);
 Q_OBJECT
 private slots:
     void createEvent();
@@ -41,12 +39,12 @@ private slots:
 
 class EventEditorWindow : public EventAddEditWindow {
 private:
-    Event &event;
+    Event *event;
 public:
-    EventEditorWindow(Event &_event, MainWindow *_main_window = nullptr, QWidget *parent = nullptr);
-// Q_OBJECT
-// private slots: 
-//     void save();
+    EventEditorWindow(Event *_event, QWidget *parent = nullptr);
+Q_OBJECT
+private slots: 
+    void save();
 };
 
 #endif

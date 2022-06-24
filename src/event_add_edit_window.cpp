@@ -16,8 +16,7 @@ void DateSelectSpinBox::setMonthDayRange(int m)
 
 // Windows:
 
-EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent) : 
-    QDialog(parent), main_window(_main_window)
+EventAddEditWindow::EventAddEditWindow(QWidget *parent) : QDialog(parent)
 {
     setModal(true);
 
@@ -36,29 +35,16 @@ EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent
     end_year  = new DateSelectSpinBox(this);
     end_hour  = new DateSelectSpinBox(this);
     end_min   = new DateSelectSpinBox(this);
-
-    auto current_time = QTime::currentTime();
+  
     const int min_spin_box_width = 55;
 
-    start_day  ->setValue(main_window->getCurrentDate().day());
-    start_month->setValue(main_window->getCurrentDate().month());
-    start_year ->setValue(main_window->getCurrentDate().year());
-    start_hour ->setValue(current_time.hour());
-    start_min  ->setValue(current_time.minute());
-    
-    end_day  ->setValue(main_window->getCurrentDate().day());
-    end_month->setValue(main_window->getCurrentDate().month());
-    end_year ->setValue(main_window->getCurrentDate().year());
-    end_hour ->setValue(current_time.hour());
-    end_min  ->setValue(current_time.minute());
-
-    start_day->  setMonthDayRange(start_month->value()); start_day->setMinimumWidth(min_spin_box_width);
+    start_day->setMinimumWidth(min_spin_box_width);
     start_month->setRange(1,12); start_month->setMinimumWidth(min_spin_box_width);
     start_year-> setRange(2022,3000); start_year->setMinimumWidth(80);
     start_hour-> setRange(0,23); start_hour->setMinimumWidth(min_spin_box_width);
     start_min->  setRange(0,59); start_min->setMinimumWidth(min_spin_box_width);
 
-    end_day->  setMonthDayRange(end_month->value()); end_day->setMinimumWidth(min_spin_box_width);
+    end_day->setMinimumWidth(min_spin_box_width);
     end_month->setRange(1,12); end_month->setMinimumWidth(min_spin_box_width);
     end_year-> setRange(2022,3000); end_year->setMinimumWidth(80);
     end_hour-> setRange(0,23); end_hour->setMinimumWidth(min_spin_box_width);
@@ -109,9 +95,27 @@ EventAddEditWindow::EventAddEditWindow(MainWindow *_main_window, QWidget *parent
 
 // adder
 
-EventAdderWindow::EventAdderWindow(MainWindow *_main_window, QWidget *parent) : 
-    EventAddEditWindow(_main_window, parent) 
+EventAdderWindow::EventAdderWindow(QWidget *parent) : 
+    EventAddEditWindow(parent) 
 {
+    // initialize date select values
+    auto current_time = QTime::currentTime();
+    start_day  ->setValue(main_window->getCurrentDate().day());
+    start_month->setValue(main_window->getCurrentDate().month());
+    start_year ->setValue(main_window->getCurrentDate().year());
+    start_hour ->setValue(current_time.hour());
+    start_min  ->setValue(current_time.minute());
+    
+    end_day  ->setValue(main_window->getCurrentDate().day());
+    end_month->setValue(main_window->getCurrentDate().month());
+    end_year ->setValue(main_window->getCurrentDate().year());
+    end_hour ->setValue(current_time.hour());
+    end_min  ->setValue(current_time.minute());
+
+    start_day->setMonthDayRange(start_month->value());
+    end_day->  setMonthDayRange(end_month->value()); 
+
+    // cancel and add buttons
     auto *cancel_button = new QPushButton("Cancel");
     auto *add_button = new QPushButton("Add Event");
 
@@ -140,14 +144,72 @@ void EventAdderWindow::createEvent()
         return;
     }
 
-    auto event = 
-    Event(title_edit->text(),description_edit->toPlainText(), start_date, end_date);
+    auto *event = 
+    new Event(title_edit->text(),description_edit->toPlainText(), start_date, end_date);
     main_window->addEvent(event);
+    
+    close();
 }
 
 // editor
-EventEditorWindow::EventEditorWindow(Event &_event, MainWindow *_main_window, QWidget *parent) : 
-    EventAddEditWindow(_main_window, parent), event(_event)
+EventEditorWindow::EventEditorWindow(Event *_event, QWidget *parent) : 
+    EventAddEditWindow(parent), event(_event)
 {
+    // intitalize event fields editors
+    title_edit->setText(event->getTitle());
+    description_edit->setText(event->getDescription());
+
+    auto start_date = event->getStart().date();
+    auto start_time = event->getStart().time();
+    start_day  ->setValue(start_date.day());
+    start_month->setValue(start_date.month());
+    start_year ->setValue(start_date.year());
+    start_hour ->setValue(start_time.hour());
+    start_min  ->setValue(start_time.minute());
+
+    auto end_date = event->getEnd().date();
+    auto end_time = event->getEnd().time();
+    end_day  ->setValue(end_date.day());
+    end_month->setValue(end_date.month());
+    end_year ->setValue(end_date.year());
+    end_hour ->setValue(end_time.hour());
+    end_min  ->setValue(end_time.minute());
+
+    // save and cancel buttons
+    auto *cancel_button = new QPushButton("Cancel");
+    auto *save_button = new QPushButton("Save changes");
+
+    connect(cancel_button,&QPushButton::clicked,this,&QWidget::close);
+    connect(save_button,&QPushButton::clicked,this,&EventEditorWindow::save);
+
+    auto *hbox = new QHBoxLayout;
+    hbox->addWidget(cancel_button,1,Qt::AlignLeft);
+    hbox->addWidget(save_button,1,Qt::AlignRight);
+
+    vbox->addLayout(hbox);
+}
+
+void EventEditorWindow::save()
+{
+    auto start_date = 
+    QDateTime(QDate(start_year->value(), start_month->value(), start_day->value()),
+              QTime(start_hour->value(), start_min->value()));
+    auto end_date = 
+    QDateTime(QDate(end_year->value(), end_month->value(), end_day->value()),
+              QTime(end_hour->value(), end_min->value()));
+
+    if(end_date < start_date) 
+    {
+        std::cerr << "Cannot apply changes: end date is less than start date\n";
+        return;
+    }
     
+    main_window->deleteEvent(event,false);
+
+    event->setTitle(title_edit->text());
+    event->setDescription(description_edit->toPlainText());
+    event->setStart(start_date);
+    event->setEnd(end_date);
+
+    main_window->addEvent(event);
 }
