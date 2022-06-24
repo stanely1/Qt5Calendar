@@ -5,6 +5,8 @@
 #include "event_add_edit_window.hpp"
 #include "event_saver.hpp"
 
+#include <iostream>
+
 MainWindow *main_window;
 
 // constructor
@@ -51,15 +53,13 @@ MainWindow::~MainWindow()
 {
     delete date_button;
     delete timetable;
-
-    EventSaver::saveEvents(events);
     events.clear();
 }
 
 // close window => quit app
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    this->~MainWindow();
+    EventSaver::saveEvents(events);
     qApp->quit();
 }
 

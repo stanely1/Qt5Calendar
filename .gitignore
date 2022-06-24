@@ -14,3 +14,4 @@
 *.json
 moc_*
 test/
+*.dat
