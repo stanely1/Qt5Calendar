@@ -10,11 +10,14 @@
 #include "main_window.hpp"
 
 class DateSelectSpinBox : public QSpinBox {
+private:
+    int year, month;
 public:
     DateSelectSpinBox(QWidget *parent = nullptr);
 Q_OBJECT
 public slots:
     void setMonthDayRange(int m);
+    void setYear(int y);
 };
 
 class EventAddEditWindow : public QDialog {

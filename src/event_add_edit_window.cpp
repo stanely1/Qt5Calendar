@@ -6,12 +6,24 @@
 
 // date select spin box
 
+bool leapYear(int y)
+{
+    return y % 100 ? y % 4 == 0 : y % 400 == 0;
+}
+
 DateSelectSpinBox::DateSelectSpinBox(QWidget *parent) : QSpinBox(parent) {};
 
 void DateSelectSpinBox::setMonthDayRange(int m)
 {
+    month = m;
     static int days_in_month[13] = {29,31,28,31,30,31,30,31,31,30,31,30,31}; // 0 - luty w roku przestępczym :)
+    if(m == 2 && leapYear(year)) m = 0;
     setRange(1,days_in_month[m]);
+}
+void DateSelectSpinBox::setYear(int y) 
+{
+    year = y;
+    setMonthDayRange(month);
 }
 
 // Windows:
@@ -79,6 +91,10 @@ EventAddEditWindow::EventAddEditWindow(QWidget *parent) : QDialog(parent)
             &DateSelectSpinBox::setMonthDayRange);
     connect(end_month,qOverload<int>(&DateSelectSpinBox::valueChanged),end_day,
             &DateSelectSpinBox::setMonthDayRange);
+    connect(start_year,qOverload<int>(&DateSelectSpinBox::valueChanged),start_day,
+            &DateSelectSpinBox::setYear);
+    connect(end_year,qOverload<int>(&DateSelectSpinBox::valueChanged),end_day,
+            &DateSelectSpinBox::setYear);
 
     // layout
     auto *form = new QFormLayout;
@@ -132,8 +148,10 @@ EventAdderWindow::EventAdderWindow(QWidget *parent) :
     end_hour ->setValue(current_time.hour());
     end_min  ->setValue(current_time.minute());
 
+    start_day->setYear(start_year->value());
+    end_day  ->setYear(end_year->value());
     start_day->setMonthDayRange(start_month->value());
-    end_day->  setMonthDayRange(end_month->value()); 
+    end_day  ->setMonthDayRange(end_month->value()); 
 
     // cancel and add buttons
     auto *cancel_button = new QPushButton("Cancel");
