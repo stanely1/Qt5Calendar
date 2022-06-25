@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
 {
     EventSaver::readEvents(this);
 
-    this->resize(width,height);
+    this->resize(WIDTH,HEIGHT);
     font = QFont(font_family,font_size);
     this->setFont(font);
 

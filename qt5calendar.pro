@@ -21,6 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp src/event_saver.hpp
 SOURCES += src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp src/event_saver.cpp
 QT += widgets
+#QT += gui
 
 QMAKE_CXXFLAGS += -std=c++17
 #QMAKE_LFLAGS += -lstdc++fs

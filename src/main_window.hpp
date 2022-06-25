@@ -14,10 +14,10 @@ private:
     std::map<QDate,std::vector<Event*>> events;
 
     QFont font;
-    int font_size = 16;
+    int font_size = 14;
     QString font_family = "Ubuntumono";
 
-    int width = 960, height = 720;
+    int WIDTH = 720, HEIGHT = 960;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

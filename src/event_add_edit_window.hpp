@@ -49,6 +49,17 @@ public:
 Q_OBJECT
 private slots: 
     void save();
+    void deleteEvent();
+};
+
+class DeleteEventDialog : public QDialog {
+private:
+    Event *event;
+public:
+    DeleteEventDialog(Event *_event, QWidget *parent = nullptr);
+Q_OBJECT
+private slots:
+    void onYes();
 };
 
 #endif

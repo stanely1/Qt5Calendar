@@ -134,6 +134,7 @@ EventAddEditWindow::~EventAddEditWindow()
 EventAdderWindow::EventAdderWindow(QWidget *parent) : 
     EventAddEditWindow(parent) 
 {
+    setWindowTitle("Add new event");
     // initialize date select values
     auto current_time = QTime::currentTime();
     start_day  ->setValue(main_window->getCurrentDate().day());
@@ -193,6 +194,7 @@ void EventAdderWindow::createEvent()
 EventEditorWindow::EventEditorWindow(Event *_event, QWidget *parent) : 
     EventAddEditWindow(parent), event(_event)
 {
+    setWindowTitle("Event editor");
     // intitalize event fields editors
     title_edit->setText(event->getTitle());
     description_edit->setText(event->getDescription());
@@ -215,14 +217,17 @@ EventEditorWindow::EventEditorWindow(Event *_event, QWidget *parent) :
 
     // save and cancel buttons
     auto *cancel_button = new QPushButton("Cancel");
-    auto *save_button = new QPushButton("Save changes");
+    auto *save_button   = new QPushButton("Save changes");
+    auto *delete_button = new QPushButton("Delete event");
 
     connect(cancel_button,&QPushButton::clicked,this,&QWidget::close);
-    connect(save_button,&QPushButton::clicked,this,&EventEditorWindow::save);
+    connect(save_button,  &QPushButton::clicked,this,&EventEditorWindow::save);
+    connect(delete_button,&QPushButton::clicked,this,&EventEditorWindow::deleteEvent);
 
     auto *hbox = new QHBoxLayout;
     hbox->addWidget(cancel_button,1,Qt::AlignLeft);
-    hbox->addWidget(save_button,1,Qt::AlignRight);
+    hbox->addWidget(delete_button,1,Qt::AlignCenter);
+    hbox->addWidget(save_button,  1,Qt::AlignRight);
 
     vbox->addLayout(hbox);
 }
@@ -250,4 +255,43 @@ void EventEditorWindow::save()
     event->setEnd(end_date);
 
     main_window->addEvent(event);
+}
+
+void EventEditorWindow::deleteEvent()
+{
+    auto delete_dialog = new DeleteEventDialog(event,this);
+    delete_dialog->show();
+}
+
+// DeleteEventDialog
+DeleteEventDialog::DeleteEventDialog(Event *_event, QWidget *parent) :
+    QDialog(parent), event(_event)
+{
+    setModal(true);
+    setWindowTitle("Delete event");
+
+    auto *label = new QLabel("Do you really want do delete this event?");
+    auto *yes_button = new QPushButton("Yes");
+    auto *no_button  = new QPushButton("No");
+
+    connect(yes_button,&QPushButton::clicked,this,&DeleteEventDialog::onYes);
+    connect(no_button, &QPushButton::clicked,this,&DeleteEventDialog::close);
+
+    auto *hbox = new QHBoxLayout;
+    hbox->addWidget(no_button ,1,Qt::AlignLeft);
+    hbox->addWidget(yes_button,1,Qt::AlignRight);
+
+    auto *vbox = new QVBoxLayout;
+    vbox->addWidget(label);
+    vbox->addLayout(hbox);
+
+    setLayout(vbox);
+}
+
+// slots
+void DeleteEventDialog::onYes()
+{
+    main_window->deleteEvent(event);
+    parentWidget()->close();
+    close();
 }

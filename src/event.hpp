@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QWidget>
+#include <QMouseEvent>
 
 class Event {
 private:
@@ -35,10 +36,8 @@ private:
     Event *event;
 public:
     EventDisplayWindow(Event *_event, QWidget *parent = nullptr);
-Q_OBJECT
-private slots:
-    void onEdit();
-    void onDelete();
+protected:
+    virtual void mousePressEvent(QMouseEvent *mouse_event);
 };
 
 #endif

@@ -47,36 +47,27 @@ void Event::setEnd(const QDateTime &_end) {end = _end;}
 EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent) : QWidget(parent), event(_event) 
 {
     auto *vbox = new QVBoxLayout;
-    auto *toolbar = new QToolBar(this);
-    auto *label = new QLabel(event->toString());
 
-    //setToolTip(event->getDescription());
+    auto *title = new QLabel(event->getTitle());
+    auto *start = new QLabel("start: " + event->getStart().toString());
+    auto *end   = new QLabel("end: " + event->getEnd().toString());
 
-    auto *edit_action = toolbar->addAction("edit");
-    toolbar->addSeparator();
-    auto *del_action  = toolbar->addAction("delete");
-
-    connect(edit_action, &QAction::triggered, this, &EventDisplayWindow::onEdit);
-    connect(del_action, &QAction::triggered, this, &EventDisplayWindow::onDelete);
-
+    setToolTip(event->toString());
+ 
     QPalette col;
     col.setColor(QPalette::Window, Qt::blue);
 
     setAutoFillBackground(true);
     setPalette(col);
 
-    vbox->addWidget(toolbar);
-    vbox->addWidget(label);
+    vbox->addWidget(title);
+    vbox->addWidget(start);
+    vbox->addWidget(end);
     setLayout(vbox);
 }
 
 // slots
-
-void EventDisplayWindow::onEdit()
+void EventDisplayWindow::mousePressEvent(QMouseEvent *mouse_event)
 {
-    event->runEditor();
-}
-void EventDisplayWindow::onDelete()
-{
-    main_window->deleteEvent(event);
+    if(mouse_event->button() == Qt::LeftButton) event->runEditor();
 }

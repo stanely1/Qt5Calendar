@@ -434,7 +434,9 @@ timetable_window.o: src/timetable_window.cpp src/timetable_window.hpp \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timetable_window.o src/timetable_window.cpp
 
 event_saver.o: src/event_saver.cpp src/event_saver.hpp \
-		src/event.hpp
+		src/event.hpp \
+		src/main_window.hpp \
+		src/timetable_window.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o event_saver.o src/event_saver.cpp
 
 moc_main_window.o: moc_main_window.cpp 
