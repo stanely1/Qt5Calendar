@@ -31,6 +31,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     date_button->setToolTip("Select day");
     option_button->setToolTip("Options");
 
+    date_button->setCursor(Qt::PointingHandCursor);
+    add_event_button->setCursor(Qt::PointingHandCursor);
+    left_button->setCursor(Qt::PointingHandCursor);
+    right_button->setCursor(Qt::PointingHandCursor);
+    option_button->setCursor(Qt::PointingHandCursor);
+
     connect(left_button, &QPushButton::clicked, this, &MainWindow::decrementDate);
     connect(right_button, &QPushButton::clicked, this, &MainWindow::incrementDate);
     connect(add_event_button, &QPushButton::clicked, this, &MainWindow::onAddEvent);

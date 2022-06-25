@@ -47,13 +47,14 @@ void Event::setEnd(const QDateTime &_end) {end = _end;}
 EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent, int size) : QWidget(parent), event(_event) 
 {
     setToolTip(event->toString());
+    setCursor(Qt::PointingHandCursor);
  
     QPalette col;
     col.setColor(QPalette::Window, Qt::blue);
 
     setAutoFillBackground(true);
     setPalette(col);
-    
+
     auto *vbox = new QVBoxLayout;
 
     auto *title = new QLabel(event->getTitle());

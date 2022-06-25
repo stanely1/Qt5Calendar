@@ -158,6 +158,9 @@ EventAdderWindow::EventAdderWindow(QWidget *parent) :
     auto *cancel_button = new QPushButton("Cancel");
     auto *add_button = new QPushButton("Add Event");
 
+    cancel_button->setCursor(Qt::PointingHandCursor);
+    add_button->setCursor(Qt::PointingHandCursor);
+
     connect(cancel_button,&QPushButton::clicked,this, &QWidget::close);
     connect(add_button,&QPushButton::clicked,this,&EventAdderWindow::createEvent);
 
@@ -220,6 +223,10 @@ EventEditorWindow::EventEditorWindow(Event *_event, QWidget *parent) :
     auto *save_button   = new QPushButton("Save changes");
     auto *delete_button = new QPushButton("Delete event");
 
+    cancel_button->setCursor(Qt::PointingHandCursor);
+    save_button  ->setCursor(Qt::PointingHandCursor);
+    delete_button->setCursor(Qt::PointingHandCursor);
+
     connect(cancel_button,&QPushButton::clicked,this,&QWidget::close);
     connect(save_button,  &QPushButton::clicked,this,&EventEditorWindow::save);
     connect(delete_button,&QPushButton::clicked,this,&EventEditorWindow::deleteEvent);
@@ -273,6 +280,9 @@ DeleteEventDialog::DeleteEventDialog(Event *_event, QWidget *parent) :
     auto *label = new QLabel("Do you really want do delete this event?");
     auto *yes_button = new QPushButton("Yes");
     auto *no_button  = new QPushButton("No");
+
+    yes_button->setCursor(Qt::PointingHandCursor);
+    no_button ->setCursor(Qt::PointingHandCursor);
 
     connect(yes_button,&QPushButton::clicked,this,&DeleteEventDialog::onYes);
     connect(no_button, &QPushButton::clicked,this,&DeleteEventDialog::close);
