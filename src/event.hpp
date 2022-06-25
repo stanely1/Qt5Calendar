@@ -35,7 +35,7 @@ class EventDisplayWindow : public QWidget {
 private: 
     Event *event;
 public:
-    EventDisplayWindow(Event *_event, QWidget *parent = nullptr);
+    EventDisplayWindow(Event *_event, QWidget *parent = nullptr, int size = 3);
 protected:
     virtual void mousePressEvent(QMouseEvent *mouse_event);
 };

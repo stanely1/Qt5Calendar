@@ -44,14 +44,8 @@ void Event::setStart(const QDateTime &_start) {start = _start;}
 void Event::setEnd(const QDateTime &_end) {end = _end;}
 
 // event dispaly window
-EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent) : QWidget(parent), event(_event) 
+EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent, int size) : QWidget(parent), event(_event) 
 {
-    auto *vbox = new QVBoxLayout;
-
-    auto *title = new QLabel(event->getTitle());
-    auto *start = new QLabel("start: " + event->getStart().toString());
-    auto *end   = new QLabel("end: " + event->getEnd().toString());
-
     setToolTip(event->toString());
  
     QPalette col;
@@ -59,10 +53,21 @@ EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent) : QWidget
 
     setAutoFillBackground(true);
     setPalette(col);
+    
+    auto *vbox = new QVBoxLayout;
 
+    auto *title = new QLabel(event->getTitle());
     vbox->addWidget(title);
-    vbox->addWidget(start);
-    vbox->addWidget(end);
+    if(size >= 2) 
+    {
+        auto *start = new QLabel("start: " + event->getStart().toString());
+        vbox->addWidget(start);
+    }
+    if(size >= 3) 
+    {
+        auto *end   = new QLabel("end: " + event->getEnd().toString());
+        vbox->addWidget(end);
+    }
     setLayout(vbox);
 }
 

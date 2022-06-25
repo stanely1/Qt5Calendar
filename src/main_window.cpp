@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
 
     vbox->addLayout(hbox);
     vbox->addWidget(timetable);
+    vbox->setSpacing(20);
 
     this->setLayout(vbox);
 }
@@ -61,6 +62,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     EventSaver::saveEvents(events);
     qApp->quit();
+}
+
+// resize event
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    updateGUI();
 }
 
 // change current date

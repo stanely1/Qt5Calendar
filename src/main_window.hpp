@@ -35,6 +35,7 @@ private slots:
     void onAddEvent();
 protected:
     virtual void closeEvent(QCloseEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 };
 
 extern MainWindow *main_window;
