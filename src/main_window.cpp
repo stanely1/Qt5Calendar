@@ -98,7 +98,11 @@ void MainWindow::onAddEvent()
 
 void MainWindow::addEvent(Event *event)
 {
-    events[event->getStart().date()].push_back(event);
+    auto end_date = event->getEnd().date();
+
+    for(auto date = event->getStart().date(); date <= end_date; date = date.addDays(1))
+        events[date].push_back(event);
+
     updateGUI();
 }
 
@@ -108,13 +112,16 @@ QDate MainWindow::getCurrentDate() {return current_date;}
 // delete event
 void MainWindow::deleteEvent(Event *event, bool free_ptr)
 {
-    auto event_date = event->getStart().date();
-    for(auto i = events[event_date].begin(); i != events[event_date].end(); i++)
-        if(*i == event) 
-        {
-            if(free_ptr) delete event;
-            events[event_date].erase(i);
-            break;
-        }
+    auto end_date = event->getEnd().date();
+
+    for(auto date = event->getStart().date(); date <= end_date; date = date.addDays(1))
+        for(auto i = events[date].begin(); i != events[date].end(); i++)
+            if(*i == event) 
+            {
+                if(free_ptr) delete event, free_ptr = false; // memory should be freed only once
+                events[date].erase(i);
+                break;
+            }
+
     updateGUI();
 }

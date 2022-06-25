@@ -39,7 +39,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = qt5calendar1.0.0
 DISTDIR = /home/stas/uwr/sem2/programowanie_obiektowe/projekt/.tmp/qt5calendar1.0.0
 LINK          = g++
-LFLAGS        = -lstdc++fs -Wl,-O1
+LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
@@ -413,7 +413,8 @@ main.o: src/main.cpp src/main_window.hpp \
 main_window.o: src/main_window.cpp src/main_window.hpp \
 		src/timetable_window.hpp \
 		src/event.hpp \
-		src/event_add_edit_window.hpp
+		src/event_add_edit_window.hpp \
+		src/event_saver.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o src/main_window.cpp
 
 event_add_edit_window.o: src/event_add_edit_window.cpp src/event_add_edit_window.hpp \

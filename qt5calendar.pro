@@ -23,4 +23,4 @@ SOURCES += src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/ev
 QT += widgets
 
 QMAKE_CXXFLAGS += -std=c++17
-QMAKE_LFLAGS += -lstdc++fs
+#QMAKE_LFLAGS += -lstdc++fs
