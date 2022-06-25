@@ -22,7 +22,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void addEvent(Event *event);
+    void addEvent(Event *event, bool _init = false);
     void deleteEvent(Event *event, bool free_ptr = true);
 
     void updateGUI();

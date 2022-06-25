@@ -2,13 +2,14 @@
 #include <QGridLayout>
 #include <QLabel>
 
-TimetableWindow::TimetableWindow(std::vector<Event*> *_events, QWidget *parent) : 
-    QWidget(parent), events(_events)
+TimetableWindow::TimetableWindow(const QDate &_date, std::vector<Event*> *_events, QWidget *parent) : 
+    QWidget(parent), events(_events), current_date(_date)
 {
     auto *grid = new QGridLayout;
 
     for(int i = 0; i < events->size(); i++)
         grid->addWidget(new EventDisplayWindow((*events)[i],this),i,0);
+    // for(auto e : *events)
 
     setLayout(grid);
 }

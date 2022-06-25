@@ -12,7 +12,7 @@ MainWindow *main_window;
 // constructor
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::currentDate())
 {
-    EventSaver::readEvents(events);
+    EventSaver::readEvents(this);
 
     this->resize(width,height);
     font = QFont(font_family,font_size);
@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     hbox->addWidget(right_button,1,Qt::AlignLeft);
     hbox->addWidget(add_event_button,1,Qt::AlignRight);
 
-    timetable = new TimetableWindow(&events[current_date],this);
+    timetable = new TimetableWindow(current_date,&events[current_date],this);
 
     vbox->addLayout(hbox);
     vbox->addWidget(timetable);
@@ -84,7 +84,7 @@ void MainWindow::updateGUI()
     l->removeWidget(timetable);
 
     delete timetable;
-    timetable = new TimetableWindow(&events[current_date],this);
+    timetable = new TimetableWindow(current_date,&events[current_date],this);
 
     l->addWidget(timetable);
 }
@@ -96,14 +96,14 @@ void MainWindow::onAddEvent()
     adder->show();
 }
 
-void MainWindow::addEvent(Event *event)
+void MainWindow::addEvent(Event *event, bool _init)
 {
     auto end_date = event->getEnd().date();
 
     for(auto date = event->getStart().date(); date <= end_date; date = date.addDays(1))
         events[date].push_back(event);
 
-    updateGUI();
+    if(!_init) updateGUI();
 }
 
 // date getter

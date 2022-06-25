@@ -1,10 +1,19 @@
-#include "event_saver.hpp"
 #include <QFile>
 #include <QTextStream>
-
+#include "event_saver.hpp"
 #include <iostream>
+#include <set>
 
 #define FILENAME "events.dat"
+
+std::set<Event*> toSet(const std::map<QDate,std::vector<Event*>> &events)
+{
+    std::set<Event*> res;
+    for(auto p : events)
+        for(auto e : p.second)
+            res.insert(e);
+    return res;
+}
 
 void EventSaver::saveEvents(const std::map<QDate,std::vector<Event*>> &events)
 {
@@ -13,16 +22,14 @@ void EventSaver::saveEvents(const std::map<QDate,std::vector<Event*>> &events)
 
     if(!f.open(QIODevice::WriteOnly)) throw std::ios_base::failure("Error saving events");
 
+    auto event_set = toSet(events);
+
     QTextStream os(&f);
-    os << events.size() << "\n";
-    for(auto p : events)
-    {
-        os << p.first.year() << " " << p.first.month() << " " << p.first.day() << "\n";
-        os << p.second.size() << "\n";
-        for(auto e : p.second) os << e->toStringStorable() << "\n";
-    }
+
+    os << event_set.size() << "\n";
+    for(auto e : event_set) os << e->toStringStorable() << "\n";
 }
-void EventSaver::readEvents(std::map<QDate,std::vector<Event*>> &events)
+void EventSaver::readEvents(MainWindow *_main_window)
 {
     std::cout << "Reading events ...\n";
     QFile f(FILENAME);
@@ -32,32 +39,28 @@ void EventSaver::readEvents(std::map<QDate,std::vector<Event*>> &events)
     }
 
     QTextStream is(&f);
-    int days_cnt; is >> days_cnt;
+    int events_cnt; is >> events_cnt;
+    is.readLine();
 
-    while(days_cnt--)
-    {
-        int y,m,d; is >> y >> m >> d;
-        auto date = QDate(y,m,d);
-        int s; is >> s; is.readLine();     
-        while(s--)
+    while(events_cnt--)
+    {    
+        QString title = is.readLine();
+        QString description;
+
+        while(true)
         {
-            QString title = is.readLine();
-            QString description;
-
-            while(true)
-            {
-                description += is.readLine();
-                if(*(description.rbegin()) == '\1') break;
-                description += "\n";
-            }
-            description.chop(1);
-
-            int sy,sm,sd,sh,smin;
-            int ey,em,ed,eh,emin;
-            is >> sy >> sm >> sd >> sh >> smin >> ey >> em >> ed >> eh >> emin;
-            events[date].push_back(new Event(title,description,QDateTime(QDate(sy,sm,sd),QTime(sh,smin)),
-                                                               QDateTime(QDate(ey,em,ed),QTime(eh,emin))));
-            is.readLine();
+            description += is.readLine();
+            if(*(description.rbegin()) == '\1') break;
+            description += "\n";
         }
+        description.chop(1);
+
+        int sy,sm,sd,sh,smin;
+        int ey,em,ed,eh,emin;
+        is >> sy >> sm >> sd >> sh >> smin >> ey >> em >> ed >> eh >> emin;
+        _main_window->addEvent(new Event(title,description,QDateTime(QDate(sy,sm,sd),QTime(sh,smin)),
+                                                           QDateTime(QDate(ey,em,ed),QTime(eh,emin))),
+                               true);
+        is.readLine();
     }
 }

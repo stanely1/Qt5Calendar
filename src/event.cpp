@@ -50,6 +50,8 @@ EventDisplayWindow::EventDisplayWindow(Event *_event, QWidget *parent) : QWidget
     auto *toolbar = new QToolBar(this);
     auto *label = new QLabel(event->toString());
 
+    //setToolTip(event->getDescription());
+
     auto *edit_action = toolbar->addAction("edit");
     toolbar->addSeparator();
     auto *del_action  = toolbar->addAction("delete");
