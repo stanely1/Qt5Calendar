@@ -33,6 +33,7 @@ private slots:
     void incrementDate();
     void decrementDate();
     void onAddEvent();
+    void clearEvents();
 protected:
     virtual void closeEvent(QCloseEvent *event);
     virtual void resizeEvent(QResizeEvent *event);

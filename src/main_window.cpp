@@ -1,11 +1,11 @@
 #include <QVBoxLayout>
-#include <QFrame>
 #include <QApplication>
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
 #include "event_saver.hpp"
 
-#include <iostream>
+#include <QAction>
+#include <QMenu>
 
 MainWindow *main_window;
 
@@ -31,15 +31,29 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
     date_button->setToolTip("Select day");
     option_button->setToolTip("Options");
 
+    // options
+    auto *option_menu = new QMenu;
+
+    auto *clear_option = new QAction("Clear all events");
+
+    option_menu->addAction(clear_option);
+    option_button->setMenu(option_menu);
+    option_button->setStyleSheet("QPushButton::menu-indicator{width:0px;}");
+
+    // cursors
     date_button->setCursor(Qt::PointingHandCursor);
     add_event_button->setCursor(Qt::PointingHandCursor);
     left_button->setCursor(Qt::PointingHandCursor);
     right_button->setCursor(Qt::PointingHandCursor);
     option_button->setCursor(Qt::PointingHandCursor);
 
+    // connections
+    // main buttons
     connect(left_button, &QPushButton::clicked, this, &MainWindow::decrementDate);
     connect(right_button, &QPushButton::clicked, this, &MainWindow::incrementDate);
     connect(add_event_button, &QPushButton::clicked, this, &MainWindow::onAddEvent);
+    // options
+    connect(clear_option, &QAction::triggered, this, &MainWindow::clearEvents);
 
     hbox->addWidget(option_button,1,Qt::AlignLeft);
     hbox->addWidget(left_button,1,Qt::AlignRight);
@@ -136,5 +150,11 @@ void MainWindow::deleteEvent(Event *event, bool free_ptr)
                 break;
             }
 
+    updateGUI();
+}
+
+void MainWindow::clearEvents()
+{
+    events.clear();
     updateGUI();
 }

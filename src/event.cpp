@@ -1,7 +1,6 @@
 #include "event.hpp"
 #include "event_add_edit_window.hpp"
 #include <QLabel>
-#include <QToolBar>
 
 // event
 Event::Event(const QString &_title, const QString &_description, 
