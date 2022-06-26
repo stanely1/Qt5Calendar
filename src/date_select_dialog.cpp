@@ -72,6 +72,7 @@ DaySelectGrid::DaySelectGrid(int y, int m, DateSelectDialog *parent) : QWidget(p
     {
         auto *button = new QPushButton(QString("%1").arg(date.day()));
         connect(button,&QPushButton::clicked,this,&DaySelectGrid::select);
+        button->setCursor(Qt::PointingHandCursor);
         grid->addWidget(button,date.weekNumber(),date.dayOfWeek());
     }
 }
