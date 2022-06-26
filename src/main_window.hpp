@@ -27,9 +27,11 @@ public:
 
     void updateGUI();
 
-    QDate getCurrentDate();
+    void setDate(const QDate &date);
+    QDate getCurrentDate() const;
 Q_OBJECT
 private slots:
+    void runDateSelector();
     void incrementDate();
     void decrementDate();
     void onAddEvent();
@@ -40,5 +42,8 @@ protected:
 };
 
 extern MainWindow *main_window;
+
+#define MIN_YEAR 2020
+#define MAX_YEAR 3000
 
 #endif

@@ -1,11 +1,11 @@
 #include <QVBoxLayout>
 #include <QApplication>
+#include <QAction>
+#include <QMenu>
 #include "main_window.hpp"
 #include "event_add_edit_window.hpp"
 #include "event_saver.hpp"
-
-#include <QAction>
-#include <QMenu>
+#include "date_select_dialog.hpp"
 
 MainWindow *main_window;
 
@@ -49,8 +49,9 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent), current_date(QDate::c
 
     // connections
     // main buttons
+    connect(date_button, &QPushButton::clicked, this, &MainWindow::runDateSelector);
     connect(left_button, &QPushButton::clicked, this, &MainWindow::decrementDate);
-    connect(right_button, &QPushButton::clicked, this, &MainWindow::incrementDate);
+    connect(right_button,&QPushButton::clicked, this, &MainWindow::incrementDate);
     connect(add_event_button, &QPushButton::clicked, this, &MainWindow::onAddEvent);
     // options
     connect(clear_option, &QAction::triggered, this, &MainWindow::clearEvents);
@@ -88,6 +89,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     updateGUI();
+}
+
+//run date selector
+void MainWindow::runDateSelector()
+{
+    auto *date_selector = new DateSelectDialog(current_date.year(),current_date.month(),this);
+    date_selector->show();
 }
 
 // change current date
@@ -134,7 +142,14 @@ void MainWindow::addEvent(Event *event, bool _init)
 }
 
 // date getter
-QDate MainWindow::getCurrentDate() {return current_date;}
+QDate MainWindow::getCurrentDate() const {return current_date;}
+
+// date setter
+void MainWindow::setDate(const QDate &date)
+{
+    current_date = date;
+    updateGUI();
+}
 
 // delete event
 void MainWindow::deleteEvent(Event *event, bool free_ptr)

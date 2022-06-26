@@ -18,8 +18,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp src/event_saver.hpp
-SOURCES += src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp src/event_saver.cpp
+HEADERS += src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp \
+           src/event_saver.hpp src/date_select_dialog.hpp
+SOURCES += src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp \
+           src/event_saver.cpp src/date_select_dialog.cpp
 QT += widgets
 #QT += gui
 

@@ -52,13 +52,13 @@ EventAddEditWindow::EventAddEditWindow(QWidget *parent) : QDialog(parent)
 
     start_day->setMinimumWidth(min_spin_box_width);
     start_month->setRange(1,12); start_month->setMinimumWidth(min_spin_box_width);
-    start_year-> setRange(2022,3000); start_year->setMinimumWidth(80);
+    start_year-> setRange(MIN_YEAR,MAX_YEAR); start_year->setMinimumWidth(80);
     start_hour-> setRange(0,23); start_hour->setMinimumWidth(min_spin_box_width);
     start_min->  setRange(0,59); start_min->setMinimumWidth(min_spin_box_width);
 
     end_day->setMinimumWidth(min_spin_box_width);
     end_month->setRange(1,12); end_month->setMinimumWidth(min_spin_box_width);
-    end_year-> setRange(2022,3000); end_year->setMinimumWidth(80);
+    end_year-> setRange(MIN_YEAR,MAX_YEAR); end_year->setMinimumWidth(80);
     end_hour-> setRange(0,23); end_hour->setMinimumWidth(min_spin_box_width);
     end_min->  setRange(0,59); end_min->setMinimumWidth(min_spin_box_width);
 

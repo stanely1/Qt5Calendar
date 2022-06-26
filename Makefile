@@ -57,18 +57,20 @@ SOURCES       = src/main.cpp \
 		src/event_add_edit_window.cpp \
 		src/event.cpp \
 		src/timetable_window.cpp \
-		src/event_saver.cpp moc_main_window.cpp \
+		src/event_saver.cpp \
+		src/date_select_dialog.cpp moc_main_window.cpp \
 		moc_event_add_edit_window.cpp \
-		moc_event.cpp
+		moc_date_select_dialog.cpp
 OBJECTS       = main.o \
 		main_window.o \
 		event_add_edit_window.o \
 		event.o \
 		timetable_window.o \
 		event_saver.o \
+		date_select_dialog.o \
 		moc_main_window.o \
 		moc_event_add_edit_window.o \
-		moc_event.o
+		moc_date_select_dialog.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -148,12 +150,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/event_add_edit_window.hpp \
 		src/event.hpp \
 		src/timetable_window.hpp \
-		src/event_saver.hpp src/main.cpp \
+		src/event_saver.hpp \
+		src/date_select_dialog.hpp src/main.cpp \
 		src/main_window.cpp \
 		src/event_add_edit_window.cpp \
 		src/event.cpp \
 		src/timetable_window.cpp \
-		src/event_saver.cpp
+		src/event_saver.cpp \
+		src/date_select_dialog.cpp
 QMAKE_TARGET  = qt5calendar
 DESTDIR       = 
 TARGET        = qt5calendar
@@ -333,8 +337,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp src/event_saver.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp src/event_saver.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main_window.hpp src/event_add_edit_window.hpp src/event.hpp src/timetable_window.hpp src/event_saver.hpp src/date_select_dialog.hpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/main_window.cpp src/event_add_edit_window.cpp src/event.cpp src/timetable_window.cpp src/event_saver.cpp src/date_select_dialog.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -366,9 +370,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -std=c++17 -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_main_window.cpp moc_event_add_edit_window.cpp moc_event.cpp
+compiler_moc_header_make_all: moc_main_window.cpp moc_event_add_edit_window.cpp moc_date_select_dialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_main_window.cpp moc_event_add_edit_window.cpp moc_event.cpp
+	-$(DEL_FILE) moc_main_window.cpp moc_event_add_edit_window.cpp moc_date_select_dialog.cpp
 moc_main_window.cpp: src/main_window.hpp \
 		src/timetable_window.hpp \
 		src/event.hpp \
@@ -384,10 +388,13 @@ moc_event_add_edit_window.cpp: src/event_add_edit_window.hpp \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/stas/uwr/sem2/programowanie_obiektowe/projekt/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/event_add_edit_window.hpp -o moc_event_add_edit_window.cpp
 
-moc_event.cpp: src/event.hpp \
+moc_date_select_dialog.cpp: src/date_select_dialog.hpp \
+		src/main_window.hpp \
+		src/timetable_window.hpp \
+		src/event.hpp \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/stas/uwr/sem2/programowanie_obiektowe/projekt/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/event.hpp -o moc_event.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/stas/uwr/sem2/programowanie_obiektowe/projekt/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/home/stas/uwr/sem2/programowanie_obiektowe/projekt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include src/date_select_dialog.hpp -o moc_date_select_dialog.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -414,7 +421,8 @@ main_window.o: src/main_window.cpp src/main_window.hpp \
 		src/timetable_window.hpp \
 		src/event.hpp \
 		src/event_add_edit_window.hpp \
-		src/event_saver.hpp
+		src/event_saver.hpp \
+		src/date_select_dialog.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o src/main_window.cpp
 
 event_add_edit_window.o: src/event_add_edit_window.cpp src/event_add_edit_window.hpp \
@@ -439,14 +447,20 @@ event_saver.o: src/event_saver.cpp src/event_saver.hpp \
 		src/timetable_window.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o event_saver.o src/event_saver.cpp
 
+date_select_dialog.o: src/date_select_dialog.cpp src/date_select_dialog.hpp \
+		src/main_window.hpp \
+		src/timetable_window.hpp \
+		src/event.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o date_select_dialog.o src/date_select_dialog.cpp
+
 moc_main_window.o: moc_main_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp
 
 moc_event_add_edit_window.o: moc_event_add_edit_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_event_add_edit_window.o moc_event_add_edit_window.cpp
 
-moc_event.o: moc_event.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_event.o moc_event.cpp
+moc_date_select_dialog.o: moc_date_select_dialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_date_select_dialog.o moc_date_select_dialog.cpp
 
 ####### Install
 
