@@ -29,11 +29,6 @@ DateSelectDialog::DateSelectDialog(int _year, int _month, QWidget *parent) :
     hbox->addWidget(year_selector);
     hbox->addWidget(month_selector);
 
-    // // weekdays
-    // auto *weekday_hbox = new QHBoxLayout;
-    // 
-    // for(auto i : weekday_name) weekday_hbox->addWidget(new QLabel(i));
-
     // vbox layout
     auto *vbox = new QVBoxLayout;
     setLayout(vbox);
