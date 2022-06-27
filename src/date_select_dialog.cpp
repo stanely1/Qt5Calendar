@@ -1,6 +1,7 @@
 #include "date_select_dialog.hpp"
 #include <QSpinBox>
 #include <QHBoxLayout>
+#include <QLabel>
 
 DateSelectDialog::DateSelectDialog(int _year, int _month, QWidget *parent) : 
     QDialog(parent), year(_year), month(_month)
@@ -28,10 +29,16 @@ DateSelectDialog::DateSelectDialog(int _year, int _month, QWidget *parent) :
     hbox->addWidget(year_selector);
     hbox->addWidget(month_selector);
 
+    // // weekdays
+    // auto *weekday_hbox = new QHBoxLayout;
+    // 
+    // for(auto i : weekday_name) weekday_hbox->addWidget(new QLabel(i));
+
     // vbox layout
     auto *vbox = new QVBoxLayout;
     setLayout(vbox);
     vbox->addLayout(hbox);
+    // vbox->addLayout(weekday_hbox);
 
     // day selection
     setGrid();
@@ -67,6 +74,9 @@ void DateSelectDialog::selectDate(int d)
 DaySelectGrid::DaySelectGrid(int y, int m, DateSelectDialog *parent) : QWidget(parent)
 {
     auto *grid = new QGridLayout(this);
+
+    static QStringList weekday_name {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+    for(int i = 0; i < 7; i++) grid->addWidget(new QLabel(weekday_name[i]), 0, i+1, Qt::AlignCenter);
     
     for(auto date = QDate(y,m,1); date.month() == m; date = date.addDays(1))
     {
