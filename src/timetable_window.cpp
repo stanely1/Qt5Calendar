@@ -41,10 +41,3 @@ TimetableWindow::TimetableWindow(const QDate &_date, std::vector<Event*> *_event
         edw->resize(WIDTH-hwidth,end_pos-start_pos);
     }
 }
-
-TimetableWindow & TimetableWindow::operator = (const TimetableWindow &t)
-{
-    if(this != &t)
-        events = t.events;
-    return *this;
-}

@@ -4,8 +4,10 @@
 #include <iostream>
 #include <set>
 
+/// Nazwa pliku, w którym zapisywane są wydarzenia
 #define FILENAME "events.dat"
 
+/// Przekształca strukturę `std::map<QDate,std::vector<Event*>>` na `std::set<Event*>`.
 std::set<Event*> toSet(const std::map<QDate,std::vector<Event*>> &events)
 {
     std::set<Event*> res;

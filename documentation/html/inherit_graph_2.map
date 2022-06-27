@@ -1,0 +1,7 @@
+<map id="Graficzna hierarchia klas" name="Graficzna hierarchia klas">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,84,108"/>
+<area shape="rect" id="node2" href="$class_day_select_grid.html" title="Klasa implementująca siatkę rozmieszczenia dni w miesiącu." alt="" coords="155,5,269,32"/>
+<area shape="rect" id="node3" href="$class_event_display_window.html" title="Klasa implementująca graficzną reprezentację wydarzenia." alt="" coords="132,56,292,83"/>
+<area shape="rect" id="node4" href="$class_main_window.html" title="Klasa reprezentująca główne okno interfejsu programu." alt="" coords="159,107,265,133"/>
+<area shape="rect" id="node5" href="$class_timetable_window.html" title="Klasa implementująca obszar, w którym wyświetlane są wydarzenia." alt="" coords="142,157,282,184"/>
+</map>

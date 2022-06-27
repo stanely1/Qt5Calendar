@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>qt5calendar: Plik źródłowy src/event.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">qt5calendar
+   </div>
+   <div id="projectbrief">Sipmle gui calendar</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('event_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">event.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="event_8hpp.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EVENTS_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define EVENTS_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QTextStream&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QDateTime&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QMouseEvent&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_event.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_event.html">Event</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    QString title;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    QString description;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QDateTime start;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QDateTime end;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_event.html#a8a58eb63acb9637aee7d793599c6adb1">Event</a>(<span class="keyword">const</span> QString &amp;_title, <span class="keyword">const</span> QString &amp;_description, <span class="keyword">const</span> QDateTime &amp;_start, <span class="keyword">const</span> QDateTime &amp;_end);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_event.html#a3eb4b8f0c5263bc2a59ac19239919d50">runEditor</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QString <a class="code" href="class_event.html#a166bbc54daf77ce077f81c64fbeb991f">toString</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    QString <a class="code" href="class_event.html#adf5a3bd88598052f9f978638e4e589c7">toStringStorable</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QString <a class="code" href="class_event.html#a6f749b39efd056b54ebf35470b95a4e7">getTitle</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    QString <a class="code" href="class_event.html#a465db87d6ca9c578db843e9568133429">getDescription</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    QDateTime <a class="code" href="class_event.html#a1be1e517dffa4f1114046b8ceba9cb51">getStart</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    QDateTime <a class="code" href="class_event.html#a15f39a36bc1eabe11a10cae296dad602">getEnd</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_event.html#af6426bf661e8bdb5790ce5b2ef73afdb">setTitle</a>(<span class="keyword">const</span> QString &amp;_title);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_event.html#a9634cb9d59cae25035ab3b4b135f0a5a">setDescription</a>(<span class="keyword">const</span> QString &amp;_description);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_event.html#a4dcfbe72978c790e56531c348b92bee1">setStart</a>(<span class="keyword">const</span> QDateTime &amp;_start);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_event.html#ae7ceb8d8cc8b0f68e7e56d7296c15f98">setEnd</a>(<span class="keyword">const</span> QDateTime &amp;_end);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_event_display_window.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_event_display_window.html">EventDisplayWindow</a> : <span class="keyword">public</span> QWidget {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>: </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_event.html">Event</a> *event;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="class_event_display_window.html#a796abb0f7b1edae6a281d88f7648bc15">EventDisplayWindow</a>(<a class="code" href="class_event.html">Event</a> *_event, QWidget *parent = <span class="keyword">nullptr</span>, <span class="keywordtype">int</span> size = 3);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_event_display_window.html#ae970fe2c1bee7b7a7e151666feb1708a">mousePressEvent</a>(QMouseEvent *mouse_event);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_event_html_a4dcfbe72978c790e56531c348b92bee1"><div class="ttname"><a href="class_event.html#a4dcfbe72978c790e56531c348b92bee1">Event::setStart</a></div><div class="ttdeci">void setStart(const QDateTime &amp;_start)</div><div class="ttdoc">Ustawia datę rozpoczęcia wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:42</div></div>
+<div class="ttc" id="aclass_event_html_ae7ceb8d8cc8b0f68e7e56d7296c15f98"><div class="ttname"><a href="class_event.html#ae7ceb8d8cc8b0f68e7e56d7296c15f98">Event::setEnd</a></div><div class="ttdeci">void setEnd(const QDateTime &amp;_end)</div><div class="ttdoc">Ustawia datę zakończenia wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:43</div></div>
+<div class="ttc" id="aclass_event_html_a6f749b39efd056b54ebf35470b95a4e7"><div class="ttname"><a href="class_event.html#a6f749b39efd056b54ebf35470b95a4e7">Event::getTitle</a></div><div class="ttdeci">QString getTitle() const</div><div class="ttdoc">Zwraca tytuł wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:32</div></div>
+<div class="ttc" id="aclass_event_display_window_html"><div class="ttname"><a href="class_event_display_window.html">EventDisplayWindow</a></div><div class="ttdoc">Klasa implementująca graficzną reprezentację wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.hpp:53</div></div>
+<div class="ttc" id="aclass_event_html"><div class="ttname"><a href="class_event.html">Event</a></div><div class="ttdoc">Klasa reprezentująca wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.hpp:12</div></div>
+<div class="ttc" id="aclass_event_html_a166bbc54daf77ce077f81c64fbeb991f"><div class="ttname"><a href="class_event.html#a166bbc54daf77ce077f81c64fbeb991f">Event::toString</a></div><div class="ttdeci">QString toString()</div><div class="ttdoc">Zwraca tekstową reprezentację wydarzenia w formacie czytelnym dla użytkownika.</div><div class="ttdef"><b>Definition:</b> event.cpp:17</div></div>
+<div class="ttc" id="aclass_event_display_window_html_a796abb0f7b1edae6a281d88f7648bc15"><div class="ttname"><a href="class_event_display_window.html#a796abb0f7b1edae6a281d88f7648bc15">EventDisplayWindow::EventDisplayWindow</a></div><div class="ttdeci">EventDisplayWindow(Event *_event, QWidget *parent=nullptr, int size=3)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event.cpp:46</div></div>
+<div class="ttc" id="aclass_event_html_a15f39a36bc1eabe11a10cae296dad602"><div class="ttname"><a href="class_event.html#a15f39a36bc1eabe11a10cae296dad602">Event::getEnd</a></div><div class="ttdeci">QDateTime getEnd() const</div><div class="ttdoc">Zwraca datę zakończenia wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:38</div></div>
+<div class="ttc" id="aclass_event_html_a1be1e517dffa4f1114046b8ceba9cb51"><div class="ttname"><a href="class_event.html#a1be1e517dffa4f1114046b8ceba9cb51">Event::getStart</a></div><div class="ttdeci">QDateTime getStart() const</div><div class="ttdoc">Zwraca datę rozpoczęcia wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:36</div></div>
+<div class="ttc" id="aclass_event_html_a465db87d6ca9c578db843e9568133429"><div class="ttname"><a href="class_event.html#a465db87d6ca9c578db843e9568133429">Event::getDescription</a></div><div class="ttdeci">QString getDescription() const</div><div class="ttdoc">Zwraca opis wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:34</div></div>
+<div class="ttc" id="aclass_event_html_a3eb4b8f0c5263bc2a59ac19239919d50"><div class="ttname"><a href="class_event.html#a3eb4b8f0c5263bc2a59ac19239919d50">Event::runEditor</a></div><div class="ttdeci">void runEditor()</div><div class="ttdoc">Uruchamia edytor wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:11</div></div>
+<div class="ttc" id="aclass_event_html_a8a58eb63acb9637aee7d793599c6adb1"><div class="ttname"><a href="class_event.html#a8a58eb63acb9637aee7d793599c6adb1">Event::Event</a></div><div class="ttdeci">Event(const QString &amp;_title, const QString &amp;_description, const QDateTime &amp;_start, const QDateTime &amp;_end)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event.cpp:6</div></div>
+<div class="ttc" id="aclass_event_html_a9634cb9d59cae25035ab3b4b135f0a5a"><div class="ttname"><a href="class_event.html#a9634cb9d59cae25035ab3b4b135f0a5a">Event::setDescription</a></div><div class="ttdeci">void setDescription(const QString &amp;_description)</div><div class="ttdoc">Ustawia opis wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:41</div></div>
+<div class="ttc" id="aclass_event_html_af6426bf661e8bdb5790ce5b2ef73afdb"><div class="ttname"><a href="class_event.html#af6426bf661e8bdb5790ce5b2ef73afdb">Event::setTitle</a></div><div class="ttdeci">void setTitle(const QString &amp;_title)</div><div class="ttdoc">Ustawia tytuł wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.cpp:40</div></div>
+<div class="ttc" id="aclass_event_html_adf5a3bd88598052f9f978638e4e589c7"><div class="ttname"><a href="class_event.html#adf5a3bd88598052f9f978638e4e589c7">Event::toStringStorable</a></div><div class="ttdeci">QString toStringStorable()</div><div class="ttdoc">Zwraca tekstową reprezentację wydarzenia w specjalnym formacie.</div><div class="ttdef"><b>Definition:</b> event.cpp:22</div></div>
+<div class="ttc" id="aclass_event_display_window_html_ae970fe2c1bee7b7a7e151666feb1708a"><div class="ttname"><a href="class_event_display_window.html#ae970fe2c1bee7b7a7e151666feb1708a">EventDisplayWindow::mousePressEvent</a></div><div class="ttdeci">virtual void mousePressEvent(QMouseEvent *mouse_event)</div><div class="ttdoc">Ta metoda nadpisuje metodę QWidget::mousePressEvent() z klasy bazowej.</div><div class="ttdef"><b>Definition:</b> event.cpp:75</div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="event_8hpp.html">event.hpp</a></li>
+    <li class="footer">Wygenerowano przez
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

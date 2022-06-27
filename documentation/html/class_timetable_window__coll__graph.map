@@ -1,0 +1,4 @@
+<map id="TimetableWindow" name="TimetableWindow">
+<area shape="rect" id="node1" title="Klasa implementująca obszar, w którym wyświetlane są wydarzenia." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="36,5,115,32"/>
+</map>

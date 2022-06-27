@@ -6,6 +6,7 @@
 
 // date select spin box
 
+/// Sprawdza, czy rok `y` jest przestępny.
 bool leapYear(int y)
 {
     return y % 100 ? y % 4 == 0 : y % 400 == 0;

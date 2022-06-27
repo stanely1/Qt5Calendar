@@ -1,0 +1,6 @@
+<map id="EventAddEditWindow" name="EventAddEditWindow">
+<area shape="rect" id="node1" title="Klasa bazowa dla klas EventAdderWindow i EventEditorWindow." alt="" coords="6,317,167,344"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,80,108"/>
+<area shape="rect" id="node3" href="$class_date_select_spin_box.html" title="Klasa implementująca pole wyboru daty przy tworzeniu lub edycji wydarzenia." alt="" coords="104,81,251,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="135,5,220,32"/>
+</map>

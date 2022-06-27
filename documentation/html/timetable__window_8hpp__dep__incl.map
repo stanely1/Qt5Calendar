@@ -1,0 +1,14 @@
+<map id="src/timetable_window.hpp" name="src/timetable_window.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="453,5,645,32"/>
+<area shape="rect" id="node2" href="$main__window_8hpp.html" title=" " alt="" coords="368,80,531,107"/>
+<area shape="rect" id="node12" href="$timetable__window_8cpp.html" title=" " alt="" coords="555,80,746,107"/>
+<area shape="rect" id="node3" href="$date__select__dialog_8hpp.html" title=" " alt="" coords="107,162,301,189"/>
+<area shape="rect" id="node5" href="$main__window_8cpp.html" title=" " alt="" coords="225,251,386,278"/>
+<area shape="rect" id="node6" href="$event__add__edit__window_8hpp.html" title=" " alt="" coords="377,155,522,196"/>
+<area shape="rect" id="node9" href="$event__saver_8hpp.html" title=" " alt="" coords="547,162,699,189"/>
+<area shape="rect" id="node11" href="$main_8cpp.html" title=" " alt="" coords="723,162,829,189"/>
+<area shape="rect" id="node4" href="$date__select__dialog_8cpp.html" title=" " alt="" coords="5,251,200,278"/>
+<area shape="rect" id="node7" href="$event_8cpp.html" title=" " alt="" coords="580,251,689,278"/>
+<area shape="rect" id="node8" href="$event__add__edit__window_8cpp.html" title=" " alt="" coords="410,244,555,285"/>
+<area shape="rect" id="node10" href="$event__saver_8cpp.html" title=" " alt="" coords="714,251,865,278"/>
+</map>

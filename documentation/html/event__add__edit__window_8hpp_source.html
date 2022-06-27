@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>qt5calendar: Plik źródłowy src/event_add_edit_window.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">qt5calendar
+   </div>
+   <div id="projectbrief">Sipmle gui calendar</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('event__add__edit__window_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">event_add_edit_window.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="event__add__edit__window_8hpp.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EVENT_ADD_EDIT_WINDOW_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="event__add__edit__window_8hpp.html#ae13cc1a8b7d2343136b41e704884f4eb">    2</a></span>&#160;<span class="preprocessor">#define EVENT_ADD_EDIT_WIDNOW_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QTextEdit&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QLineEdit&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QSpinBox&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="event_8hpp.html">event.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="main__window_8hpp.html">main_window.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_date_select_spin_box.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> : <span class="keyword">public</span> QSpinBox {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> year, month;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_date_select_spin_box.html#a3b17afd9a3cf3b283aa14cac0d818f45">DateSelectSpinBox</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;Q_OBJECT</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_date_select_spin_box.html#ae186c7fb29a45fbb07dcffd0e5407017">setMonthDayRange</a>(<span class="keywordtype">int</span> m);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_date_select_spin_box.html#aa7a7582ab53c057effc623bdb0843dd5">setYear</a>(<span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_event_add_edit_window.html">EventAddEditWindow</a> : <span class="keyword">public</span> QDialog {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#ac8e7ba381a1cfbdb8bd36e8b330411e5">   34</a></span>&#160;    QLineEdit *<a class="code" href="class_event_add_edit_window.html#ac8e7ba381a1cfbdb8bd36e8b330411e5">title_edit</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#af450e760f5fffef15fa0391d9a9d63a7">   36</a></span>&#160;    QTextEdit *<a class="code" href="class_event_add_edit_window.html#af450e760f5fffef15fa0391d9a9d63a7">description_edit</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a7bccd42a00fb86ee35040da9b62b933b">   39</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a7bccd42a00fb86ee35040da9b62b933b">start_day</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a13e132845e62c36dd7985936d42135d5">   41</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a13e132845e62c36dd7985936d42135d5">start_month</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a839bd4976e3f28c818fd2f69a16d8037">   43</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a839bd4976e3f28c818fd2f69a16d8037">start_year</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#ad58b51af84426efc0bdbefb93953bed5">   45</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#ad58b51af84426efc0bdbefb93953bed5">start_hour</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#abf8aefc3dafbf62d72d72a0074209d2a">   47</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#abf8aefc3dafbf62d72d72a0074209d2a">start_min</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a6a99aeb22389ff154eb431c2f3e3bc43">   50</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a6a99aeb22389ff154eb431c2f3e3bc43">end_day</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a01111dc59f18963bfb8cac5bd8e7e515">   52</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a01111dc59f18963bfb8cac5bd8e7e515">end_month</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#af6c0eca121b48f183b15926ccde67852">   54</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#af6c0eca121b48f183b15926ccde67852">end_year</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a939b5a214edf4eb255828aafa1f22ce2">   56</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a939b5a214edf4eb255828aafa1f22ce2">end_hour</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a836407d5b4267e45faced8a923eab386">   58</a></span>&#160;    <a class="code" href="class_date_select_spin_box.html">DateSelectSpinBox</a> *<a class="code" href="class_event_add_edit_window.html#a836407d5b4267e45faced8a923eab386">end_min</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_event_add_edit_window.html#a38a49764c916020a7cd9c88ebc8a4d2b">   61</a></span>&#160;    QVBoxLayout *<a class="code" href="class_event_add_edit_window.html#a38a49764c916020a7cd9c88ebc8a4d2b">vbox</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="class_event_add_edit_window.html#a71f488b5e25c05b02d595410fc541fb4">EventAddEditWindow</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_event_add_edit_window.html#a501beda8218a4d4716fd7141b1c0ee6c">~EventAddEditWindow</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_event_adder_window.html">   70</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_event_adder_window.html">EventAdderWindow</a> : <span class="keyword">public</span> <a class="code" href="class_event_add_edit_window.html">EventAddEditWindow</a> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_event_adder_window.html#ad2e2257748a69fe20790be4a5fad9f9b">EventAdderWindow</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;Q_OBJECT</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> createEvent();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class_event_editor_window.html">   80</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_event_editor_window.html">EventEditorWindow</a> : <span class="keyword">public</span> <a class="code" href="class_event_add_edit_window.html">EventAddEditWindow</a> {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="class_event.html">Event</a> *event;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="class_event_editor_window.html#a702764b8d9493c7b488496f9136bbc06">EventEditorWindow</a>(<a class="code" href="class_event.html">Event</a> *_event, QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;Q_OBJECT</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">private</span> slots: </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> save();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> deleteEvent();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="class_delete_event_dialog.html">   99</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_delete_event_dialog.html">DeleteEventDialog</a> : <span class="keyword">public</span> QDialog {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="class_event.html">Event</a> *event;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_delete_event_dialog.html#af9f9602766064a25d3671acdc63e9444">DeleteEventDialog</a>(<a class="code" href="class_event.html">Event</a> *_event, QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;Q_OBJECT</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> onYes();</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclass_event_adder_window_html"><div class="ttname"><a href="class_event_adder_window.html">EventAdderWindow</a></div><div class="ttdoc">Klasa reprezentująca okno umożliwiające dodanie nowego wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:70</div></div>
+<div class="ttc" id="amain__window_8hpp_html"><div class="ttname"><a href="main__window_8hpp.html">main_window.hpp</a></div></div>
+<div class="ttc" id="aclass_date_select_spin_box_html"><div class="ttname"><a href="class_date_select_spin_box.html">DateSelectSpinBox</a></div><div class="ttdoc">Klasa implementująca pole wyboru daty przy tworzeniu lub edycji wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:13</div></div>
+<div class="ttc" id="aclass_date_select_spin_box_html_aa7a7582ab53c057effc623bdb0843dd5"><div class="ttname"><a href="class_date_select_spin_box.html#aa7a7582ab53c057effc623bdb0843dd5">DateSelectSpinBox::setYear</a></div><div class="ttdeci">void setYear(int y)</div><div class="ttdoc">Ustawia rok.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:24</div></div>
+<div class="ttc" id="aclass_event_editor_window_html_a702764b8d9493c7b488496f9136bbc06"><div class="ttname"><a href="class_event_editor_window.html#a702764b8d9493c7b488496f9136bbc06">EventEditorWindow::EventEditorWindow</a></div><div class="ttdeci">EventEditorWindow(Event *_event, QWidget *parent=nullptr)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:198</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a839bd4976e3f28c818fd2f69a16d8037"><div class="ttname"><a href="class_event_add_edit_window.html#a839bd4976e3f28c818fd2f69a16d8037">EventAddEditWindow::start_year</a></div><div class="ttdeci">DateSelectSpinBox * start_year</div><div class="ttdoc">Pole do wyboru roku rozpoczęcia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:43</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_af6c0eca121b48f183b15926ccde67852"><div class="ttname"><a href="class_event_add_edit_window.html#af6c0eca121b48f183b15926ccde67852">EventAddEditWindow::end_year</a></div><div class="ttdeci">DateSelectSpinBox * end_year</div><div class="ttdoc">Pole do wyboru roku zakończenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:54</div></div>
+<div class="ttc" id="aevent_8hpp_html"><div class="ttname"><a href="event_8hpp.html">event.hpp</a></div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_abf8aefc3dafbf62d72d72a0074209d2a"><div class="ttname"><a href="class_event_add_edit_window.html#abf8aefc3dafbf62d72d72a0074209d2a">EventAddEditWindow::start_min</a></div><div class="ttdeci">DateSelectSpinBox * start_min</div><div class="ttdoc">Pole do wyboru minuty rozpoczęcia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:47</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_ad58b51af84426efc0bdbefb93953bed5"><div class="ttname"><a href="class_event_add_edit_window.html#ad58b51af84426efc0bdbefb93953bed5">EventAddEditWindow::start_hour</a></div><div class="ttdeci">DateSelectSpinBox * start_hour</div><div class="ttdoc">Pole do wyboru godziny rozpoczęcia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:45</div></div>
+<div class="ttc" id="aclass_event_html"><div class="ttname"><a href="class_event.html">Event</a></div><div class="ttdoc">Klasa reprezentująca wydarzenia.</div><div class="ttdef"><b>Definition:</b> event.hpp:12</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a01111dc59f18963bfb8cac5bd8e7e515"><div class="ttname"><a href="class_event_add_edit_window.html#a01111dc59f18963bfb8cac5bd8e7e515">EventAddEditWindow::end_month</a></div><div class="ttdeci">DateSelectSpinBox * end_month</div><div class="ttdoc">Pole do wyboru miesiąca zakończenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:52</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a501beda8218a4d4716fd7141b1c0ee6c"><div class="ttname"><a href="class_event_add_edit_window.html#a501beda8218a4d4716fd7141b1c0ee6c">EventAddEditWindow::~EventAddEditWindow</a></div><div class="ttdeci">~EventAddEditWindow()</div><div class="ttdoc">Destruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:113</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a13e132845e62c36dd7985936d42135d5"><div class="ttname"><a href="class_event_add_edit_window.html#a13e132845e62c36dd7985936d42135d5">EventAddEditWindow::start_month</a></div><div class="ttdeci">DateSelectSpinBox * start_month</div><div class="ttdoc">Pole do wyboru miesiąca rozpoczęcia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:41</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a836407d5b4267e45faced8a923eab386"><div class="ttname"><a href="class_event_add_edit_window.html#a836407d5b4267e45faced8a923eab386">EventAddEditWindow::end_min</a></div><div class="ttdeci">DateSelectSpinBox * end_min</div><div class="ttdoc">Pole do wyboru minuty zakończenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:58</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_ac8e7ba381a1cfbdb8bd36e8b330411e5"><div class="ttname"><a href="class_event_add_edit_window.html#ac8e7ba381a1cfbdb8bd36e8b330411e5">EventAddEditWindow::title_edit</a></div><div class="ttdeci">QLineEdit * title_edit</div><div class="ttdoc">Pole tektowe do podania tytułu wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:34</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a7bccd42a00fb86ee35040da9b62b933b"><div class="ttname"><a href="class_event_add_edit_window.html#a7bccd42a00fb86ee35040da9b62b933b">EventAddEditWindow::start_day</a></div><div class="ttdeci">DateSelectSpinBox * start_day</div><div class="ttdoc">Pole do wyboru dnia rozpoczęcia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:39</div></div>
+<div class="ttc" id="aclass_date_select_spin_box_html_a3b17afd9a3cf3b283aa14cac0d818f45"><div class="ttname"><a href="class_date_select_spin_box.html#a3b17afd9a3cf3b283aa14cac0d818f45">DateSelectSpinBox::DateSelectSpinBox</a></div><div class="ttdeci">DateSelectSpinBox(QWidget *parent=nullptr)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:15</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a939b5a214edf4eb255828aafa1f22ce2"><div class="ttname"><a href="class_event_add_edit_window.html#a939b5a214edf4eb255828aafa1f22ce2">EventAddEditWindow::end_hour</a></div><div class="ttdeci">DateSelectSpinBox * end_hour</div><div class="ttdoc">Pole do wyboru godziny zakończenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:56</div></div>
+<div class="ttc" id="aclass_delete_event_dialog_html_af9f9602766064a25d3671acdc63e9444"><div class="ttname"><a href="class_delete_event_dialog.html#af9f9602766064a25d3671acdc63e9444">DeleteEventDialog::DeleteEventDialog</a></div><div class="ttdeci">DeleteEventDialog(Event *_event, QWidget *parent=nullptr)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:275</div></div>
+<div class="ttc" id="aclass_event_editor_window_html"><div class="ttname"><a href="class_event_editor_window.html">EventEditorWindow</a></div><div class="ttdoc">Klasa reprezentująca okno edytora wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:80</div></div>
+<div class="ttc" id="aclass_event_adder_window_html_ad2e2257748a69fe20790be4a5fad9f9b"><div class="ttname"><a href="class_event_adder_window.html#ad2e2257748a69fe20790be4a5fad9f9b">EventAdderWindow::EventAdderWindow</a></div><div class="ttdeci">EventAdderWindow(QWidget *parent=nullptr)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:135</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a6a99aeb22389ff154eb431c2f3e3bc43"><div class="ttname"><a href="class_event_add_edit_window.html#a6a99aeb22389ff154eb431c2f3e3bc43">EventAddEditWindow::end_day</a></div><div class="ttdeci">DateSelectSpinBox * end_day</div><div class="ttdoc">Pole do wyboru dnia zakończenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:50</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a38a49764c916020a7cd9c88ebc8a4d2b"><div class="ttname"><a href="class_event_add_edit_window.html#a38a49764c916020a7cd9c88ebc8a4d2b">EventAddEditWindow::vbox</a></div><div class="ttdeci">QVBoxLayout * vbox</div><div class="ttdoc">Obiekt zarządzający ułożeniem elementów w wyświetlanym oknie.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:61</div></div>
+<div class="ttc" id="aclass_delete_event_dialog_html"><div class="ttname"><a href="class_delete_event_dialog.html">DeleteEventDialog</a></div><div class="ttdoc">Klasa reprezentująca okienko wyświetlane przy próbie usunięcia wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:99</div></div>
+<div class="ttc" id="aclass_date_select_spin_box_html_ae186c7fb29a45fbb07dcffd0e5407017"><div class="ttname"><a href="class_date_select_spin_box.html#ae186c7fb29a45fbb07dcffd0e5407017">DateSelectSpinBox::setMonthDayRange</a></div><div class="ttdeci">void setMonthDayRange(int m)</div><div class="ttdoc">Ustawia zasięg w zależności od miesiąca.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:17</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_af450e760f5fffef15fa0391d9a9d63a7"><div class="ttname"><a href="class_event_add_edit_window.html#af450e760f5fffef15fa0391d9a9d63a7">EventAddEditWindow::description_edit</a></div><div class="ttdeci">QTextEdit * description_edit</div><div class="ttdoc">Pole tektowe do podania opisu wydarzenia.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:36</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html"><div class="ttname"><a href="class_event_add_edit_window.html">EventAddEditWindow</a></div><div class="ttdoc">Klasa bazowa dla klas EventAdderWindow i EventEditorWindow.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.hpp:31</div></div>
+<div class="ttc" id="aclass_event_add_edit_window_html_a71f488b5e25c05b02d595410fc541fb4"><div class="ttname"><a href="class_event_add_edit_window.html#a71f488b5e25c05b02d595410fc541fb4">EventAddEditWindow::EventAddEditWindow</a></div><div class="ttdeci">EventAddEditWindow(QWidget *parent=nullptr)</div><div class="ttdoc">Konstruktor.</div><div class="ttdef"><b>Definition:</b> event_add_edit_window.cpp:32</div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="event__add__edit__window_8hpp.html">event_add_edit_window.hpp</a></li>
+    <li class="footer">Wygenerowano przez
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

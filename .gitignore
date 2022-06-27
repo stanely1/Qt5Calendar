@@ -10,7 +10,7 @@
 *.log
 *.tex
 *.drawio
-*.png
+#*.png
 *.json
 moc_*
 test/
